@@ -1,11 +1,25 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { FaShoppingCart } from 'react-icons/fa';
 import styles from '../styles/Home.module.css'
 
+/**
+ * @lesson-10-solution Exercise 1
+ * We can import our useCart hook function just like any other
+ * exported function, making it immediately available to use
+ * right on our homepage.
+ */
+
+import {useCart} from '../hooks/use-cart.js';
+
 import products from '../products.json';
-import {initiateCheckout} from '../lib/payments'
 
 export default function Home() {
+
+  const { subtotal, quantity, addToCart, checkout } = useCart();
+
   
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,25 +41,19 @@ export default function Home() {
             const { id, title, image, description, price } = product;
             return (
               <li key={id} className={styles.card}>
-                <a href="#">
-                  <img src={image} alt={title} />
-                  <h3>{ title }</h3>
-                  <p>${ price }</p>
-                  <p>{ description }</p>
-                </a>
-                <p>
-                  <button className={styles.button} onClick={() => {
-                    initiateCheckout({
-                      lineItems: [
-                        {
-                          price: id,
-                          quantity: 1
-                        }
-                      ]
-                    })
-                  }}>Buy Now</button>
-                </p>
+                <Link href={`/products/${id}`}>
+                  <a>
+                    <img src={image} alt={title} />
+                    <h3>{ title }</h3>
+                    <p>${ price }</p>
+                    <p>{ description }</p>
+                    <p>
+                      <button className={styles.button} onClick={() => addToCart({ id })}>Buy</button>
+                    </p>
+                  </a>
+                </Link>
               </li>
+          
             )
           })}
         </ul>

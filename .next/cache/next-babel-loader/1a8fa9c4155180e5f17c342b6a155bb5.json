@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function useCart() {\n  return 'our cart';\n}","map":{"version":3,"sources":["/Users/acandael/Tutorials/space-jelly-store/hooks/use-cart.js"],"names":["useCart"],"mappings":"AAAA,eAAe,SAASA,OAAT,GAAkB;AAC/B,SAAO,UAAP;AACD","sourcesContent":["export default function useCart(){\n  return 'our cart'\n}"]},"metadata":{},"sourceType":"module"}
